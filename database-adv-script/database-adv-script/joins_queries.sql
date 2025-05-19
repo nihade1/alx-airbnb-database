@@ -1,21 +1,16 @@
--- This file contains SQL queries that demonstrate various types of joins.
+-- SQL JOIN examples for an Airbnb clone database
 
--- Example of INNER JOIN
-SELECT a.column1, b.column2
-FROM table_a a
-INNER JOIN table_b b ON a.common_column = b.common_column;
+-- 1. INNER JOIN: Retrieve all bookings and the respective users who made those bookings
+SELECT bookings.*, users.*
+FROM bookings
+INNER JOIN users ON bookings.user_id = users.id;
 
--- Example of LEFT JOIN
-SELECT a.column1, b.column2
-FROM table_a a
-LEFT JOIN table_b b ON a.common_column = b.common_column;
+-- 2. LEFT JOIN: Retrieve all properties and their reviews, including properties that have no reviews
+SELECT properties.*, reviews.*
+FROM properties
+LEFT JOIN reviews ON properties.id = reviews.property_id;
 
--- Example of RIGHT JOIN
-SELECT a.column1, b.column2
-FROM table_a a
-RIGHT JOIN table_b b ON a.common_column = b.common_column;
-
--- Example of FULL OUTER JOIN
-SELECT a.column1, b.column2
-FROM table_a a
-FULL OUTER JOIN table_b b ON a.common_column = b.common_column;
+-- 3. FULL OUTER JOIN: Retrieve all users and all bookings, even if the user has no booking or a booking is not linked to a user
+SELECT users.*, bookings.*
+FROM users
+FULL OUTER JOIN bookings ON users.id = bookings.user_id;
